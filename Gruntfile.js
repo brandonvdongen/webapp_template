@@ -43,18 +43,36 @@ module.exports = function (grunt) {
                 ]
             }
         },
-        clean: ['babel/']
+        cssmin: {
+            target: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/css',
+                    src: ['*.css', '!*.min.css'],
+                    dest: 'dist/css',
+                    ext: '.min.css'
+                }]
+            }
+        },
+        clean: {
+            build: ['babel/'],
+            release: ['dist/']
+        }
     });
 
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     grunt.registerTask('build', [
+        'clean',
         'babel',
         'uglify',
-        'clean'
+        'cssmin',
+        'htmlmin',
+        'clean:build'
     ]);
 
 
