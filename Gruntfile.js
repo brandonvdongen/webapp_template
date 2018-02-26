@@ -75,7 +75,6 @@ module.exports = function (grunt) {
         'clean:build'
     ]);
 
-
     grunt.registerTask('default', ['build']);
 }
 ;
